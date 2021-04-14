@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -63,5 +64,9 @@ public class UserService {
         User user = userRepository.findById(userId).get();
             user.getCourses();
             return user;
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 }

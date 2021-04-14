@@ -7,6 +7,7 @@ import tekshila.sample.model.User;
 import tekshila.sample.service.UserService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -33,9 +34,9 @@ public class UserController {
         return userService.getUser(userId);
     }
 
-//    @GetMapping("/users")
-//    public Set<User> getUsers() {
-//        return userService.getUsers();
-//    }
+    @GetMapping("/users")
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
 
 }
