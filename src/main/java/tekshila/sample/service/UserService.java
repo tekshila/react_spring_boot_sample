@@ -59,4 +59,9 @@ public class UserService {
             return new User();
     }
 
+    public User getUser(Integer userId) {
+        User user = userRepository.findById(userId).get();
+            user.getCourses();
+            return user;
+    }
 }

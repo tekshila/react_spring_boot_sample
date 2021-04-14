@@ -26,8 +26,8 @@ public class Course implements Serializable {
 
     private String name;
 
-    @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-    private Set<User> students = new HashSet<>();
+//    @EqualsAndHashCode.Exclude
+//    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+//    private Set<User> students = new HashSet<>();
 
 }

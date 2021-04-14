@@ -6,6 +6,8 @@ import tekshila.sample.model.Course;
 import tekshila.sample.model.User;
 import tekshila.sample.service.UserService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
@@ -25,5 +27,15 @@ public class UserController {
     public User enrolCourseUpdUser(@PathVariable(name = "user_id",required = true) Integer userId, @RequestBody Course c) {
         return userService.enrolCourse(userId,c.getId());
     }
+
+    @GetMapping("/user/{user_id}")
+    public User getUser(@PathVariable(name="user_id") Integer userId) {
+        return userService.getUser(userId);
+    }
+
+//    @GetMapping("/users")
+//    public Set<User> getUsers() {
+//        return userService.getUsers();
+//    }
 
 }
