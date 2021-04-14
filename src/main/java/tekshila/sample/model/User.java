@@ -2,30 +2,46 @@ package tekshila.sample.model;
 
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode
+@Table(name = "users")
 public class User {
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String email;
 
-    @Nullable
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Course> courses;
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "users_courses",
+            joinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "course_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    private Set<Course> courses = new HashSet<>();
+
+
+
 }

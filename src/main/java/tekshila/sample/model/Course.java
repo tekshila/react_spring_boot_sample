@@ -1,27 +1,33 @@
 package tekshila.sample.model;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.NotFound;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
 @NoArgsConstructor
-public class Course {
+@EqualsAndHashCode
+@Table(name = "courses")
+public class Course implements Serializable {
+
+    public Course(String name) {
+        this.name = name;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     private String name;
 
-//    @ManyToOne(cascade=CascadeType.PERSIST)
-//    private User user;
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    private Set<User> students = new HashSet<>();
 
 }

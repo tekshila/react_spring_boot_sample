@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import tekshila.sample.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User,Integer> {
     public User findByEmail(String email);
 }
