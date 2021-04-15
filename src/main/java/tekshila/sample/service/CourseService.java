@@ -33,4 +33,11 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
+    public Course getCourse(Integer courseId, String withStudents) {
+        Course c = null;
+        if(null != withStudents && "y".equalsIgnoreCase(withStudents)) {
+           c  = courseRepository.findById(courseId).get();
+        }
+        return c;
+    }
 }

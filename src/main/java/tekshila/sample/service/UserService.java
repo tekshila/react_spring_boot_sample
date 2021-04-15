@@ -1,6 +1,7 @@
 package tekshila.sample.service;
 
 import org.springframework.stereotype.Service;
+import tekshila.sample.dto.UserDTO;
 import tekshila.sample.exception.CourseNotFoundException;
 import tekshila.sample.exception.UserExistException;
 import tekshila.sample.exception.UserNotFoundException;
@@ -16,6 +17,12 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+/*
+ * DTO's are very important here
+ * else session will be closed even when persistent objects are
+ * passed along.
+ *
+ */
 public class UserService {
 
     private final UserRepository userRepository;
@@ -60,13 +67,19 @@ public class UserService {
             return new User();
     }
 
-    public User getUser(Integer userId) {
+    public UserDTO getUser(Integer userId) {
         User user = userRepository.findById(userId).get();
-            user.getCourses();
-            return user;
+           // user.getCourses();
+            return new UserDTO(user);
     }
 
-    public List<User> getUsers() {
-        return userRepository.findAll();
+
+    public List<UserDTO> getUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO> usersRst = new ArrayList<>();
+        for(User u: users) {
+            usersRst.add(new UserDTO(u));
+        }
+        return usersRst;
     }
 }

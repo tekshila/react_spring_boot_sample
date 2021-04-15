@@ -2,6 +2,7 @@ package tekshila.sample.controller;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import tekshila.sample.dto.UserDTO;
 import tekshila.sample.model.Course;
 import tekshila.sample.model.User;
 import tekshila.sample.service.UserService;
@@ -30,12 +31,12 @@ public class UserController {
     }
 
     @GetMapping("/user/{user_id}")
-    public User getUser(@PathVariable(name="user_id") Integer userId) {
+    public UserDTO getUser(@PathVariable(name="user_id") Integer userId) {
         return userService.getUser(userId);
     }
 
     @GetMapping("/users")
-    public List<User> getUsers() {
+    public List<UserDTO> getUsers() {
         return userService.getUsers();
     }
 

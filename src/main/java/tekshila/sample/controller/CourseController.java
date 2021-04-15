@@ -28,6 +28,9 @@ public class CourseController {
         return courseService.getCourses();
     }
 
-
+    @GetMapping("/course/{course_id}")
+    public Course getCourse(@PathVariable(name = "course_id") Integer courseId, @RequestBody String withStudents) {
+        return courseService.getCourse(courseId,withStudents);
+    }
 
 }

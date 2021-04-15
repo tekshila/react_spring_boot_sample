@@ -3,6 +3,8 @@ package tekshila.sample.model;
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;

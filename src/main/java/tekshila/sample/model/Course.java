@@ -2,6 +2,8 @@ package tekshila.sample.model;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NotFound;
 
 import javax.persistence.*;
@@ -27,7 +29,8 @@ public class Course implements Serializable {
     private String name;
 
 //    @EqualsAndHashCode.Exclude
-//    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
-//    private Set<User> students = new HashSet<>();
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)
+    private Set<User> students = new HashSet<>();
 
 }
